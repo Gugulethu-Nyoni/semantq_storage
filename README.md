@@ -2,3 +2,5 @@
 
 Light weight plug and play abstraction for semantqQL full stack projects.
 
+works with Amazon S3, UploadThing, Cloudinary Etc
+
