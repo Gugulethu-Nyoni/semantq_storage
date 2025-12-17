@@ -1,12 +1,19 @@
-// @semantql/storage - Main exports
+// @semantql/storage/index.js
 import StorageService from './lib/StorageService.js';
 import * as providers from './providers/index.js';
 import { createUploadMiddleware } from './middleware.js';
 import { 
   defineFileFields, 
   validateFile, 
-  generateFolderPath 
+  generateFolderPath,
+  MIME_CATEGORIES,
+  getMimeTypesForCategory,
+  expandCategories
 } from './utils.js';
+
+// Import new components
+import StorageConfig from './lib/config.js';
+import { ModelFileService, createModelFileService } from './lib/ModelFileService.js';
 
 // Factory function for easy creation
 export function createStorage(config = {}) {
@@ -20,8 +27,22 @@ export {
   createUploadMiddleware,
   defineFileFields,
   validateFile,
-  generateFolderPath
+  generateFolderPath,
+  MIME_CATEGORIES,
+  getMimeTypesForCategory,
+  expandCategories,
+  // New exports
+  StorageConfig,
+  ModelFileService,
+  createModelFileService
 };
 
 // Default export
-export default { createStorage, providers, createUploadMiddleware };
+export default { 
+  createStorage, 
+  providers, 
+  createUploadMiddleware,
+  createModelFileService,
+  StorageConfig,
+  ModelFileService
+};

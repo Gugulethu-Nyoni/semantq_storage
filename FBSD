@@ -4,6 +4,14 @@
 ├── providers/
 │   ├── index.js         # Provider exports
 │   ├── uploadthing.js   # UploadThing provider
-│   └── s3.js           # AWS S3 provider
+│   ├── s3.js           # AWS S3 provider
+│   └── cloudinary.js    # Cloudinary provider
 ├── middleware.js        # Express middleware (single file)
-└── utils.js            # All utils in one file
+├── utils.js            # All utils in one file
+├── lib/
+│   ├── StorageService.js       # Core storage service
+│   ├── config.js              # Configuration loader (NEW)
+│   └── ModelFileService.js    # Model-specific file handler (NEW)
+├── templates/
+│   └── storage-integrated-service.js  # Template for CLI (NEW)
+└── README.md

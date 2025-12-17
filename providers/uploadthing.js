@@ -1,3 +1,4 @@
+// providers/uploadthing.js
 import { UTApi } from 'uploadthing/server';
 
 export default class UploadThingProvider {

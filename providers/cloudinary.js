@@ -1,4 +1,5 @@
 // Simple Cloudinary provider
+// providers/cloudinary.js
 export default class CloudinaryProvider {
   constructor(config = {}) {
     this.cloudName = config.cloudName || process.env.CLOUDINARY_CLOUD_NAME;
