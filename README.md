@@ -4,3 +4,5 @@ Light weight plug and play file storage abstraction for semantqQL full stack pro
 
 works with Amazon S3, UploadThing, Cloudinary Etc
 
+Test and complete
+
