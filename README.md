@@ -6,5 +6,5 @@ works with Amazon S3, UploadThing, Cloudinary Etc
 
 Test and complete
 
-Integrated with cli and MCSR Modules (service)
+Integrated with cli and MCSR Modules (service and controller)
 
