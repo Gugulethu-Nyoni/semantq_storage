@@ -1,7 +1,7 @@
 
 # @semantq/storage
 
-A lightweight, provider-agnostic file storage solution for Node.js applications. Easily handle file uploads, storage, and management across multiple providers (UploadThing, AWS S3, Cloudinary) with a unified API. Integrates seamlessly with semantqQL
+A lightweight, provider-agnostic file storage solution for Node.js applications. Easily handle file uploads, storage, and management across multiple providers (UploadThing, AWS S3, Cloudinary) with a unified API. Integrates seamlessly with semantqQL projects.
 
 ## Features
 
