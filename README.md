@@ -396,5 +396,10 @@ MIT © Gugulethu Nyoni
 - Examples: `/examples` directory
 
 
-**Built for the SemantQ ecosystem** · **Simple · Flexible · Powerful**
-```
+**Built for the semantq ecosystem** · **Simple · Flexible · Powerful**
+
+
+Semantq is open-source software licensed under the **MIT License**.
+
+## Semantq Main Documentation: [Semantq](https://github.com/Gugulethu-Nyoni/semantq).
+
