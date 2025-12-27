@@ -5,7 +5,7 @@
 │   ├── index.js         # Provider exports
 │   ├── uploadthing.js   # UploadThing provider
 │   ├── s3.js           # AWS S3 provider
-│   └── cloudinary.js    # Cloudinary provider
+│   └── cloudinary.js    # Cloudinary provider -can add more
 ├── middleware.js        # Express middleware (single file)
 ├── utils.js            # All utils in one file
 ├── lib/
