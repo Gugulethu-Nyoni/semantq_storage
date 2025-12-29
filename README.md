@@ -19,6 +19,12 @@ A lightweight, provider-agnostic file storage solution for Node.js applications.
 npm install @semantq/storage
 ```
 
+OR
+
+```bash
+npm i @semantq/storage
+```
+
 ## Quick Start
 
 ### 1. Configure Your Provider
