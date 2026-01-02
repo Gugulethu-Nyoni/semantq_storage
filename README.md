@@ -389,7 +389,7 @@ app.post('/avatar', avatarService.getUploadMiddleware(), async (req, res) => {
 ## Related Packages
 
 - `@semantq/mail` - Plug and play Email service with templating
-- `@semantq/auth` - User Authentication utilities
+- `@semantq/auth` - User Management/Authentication utilities
 
 ## License
 
