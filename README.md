@@ -358,7 +358,7 @@ storage: {
 ```javascript
 storage: {
   provider: 'uploadthing',
-  debug: true // Enables verbose logging for debugging
+  debug: true // Enables verbose (error) logging for debugging
 }
 ```
 
