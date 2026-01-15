@@ -4,6 +4,7 @@ import { createModelFileService } from '@semantql/storage';
 /**
  * Template for creating a storage-integrated service
  * This shows how to wrap an existing service with file upload capabilities
+ * You can implement this in your actual model
  */
 
 export function createStorageIntegratedService(baseService, modelName, modelFileConfig = {}) {
