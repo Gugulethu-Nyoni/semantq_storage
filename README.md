@@ -9,7 +9,7 @@ A lightweight, provider-agnostic file storage solution for Node.js applications.
 - **Express Middleware**: Built-in multer middleware for handling single and multiple file uploads
 - **Model-First Approach**: Integrate file storage directly with your data models
 - **Type Safety**: Full MIME type validation with category support (images, documents, etc.)
-- **Automatic Cleanup**: Delete associated files when records are removed
+- **Automatic Cleanup**: Delete associated files when records are removed/deleted
 - **Smart Config**: Auto-loads configuration from your Semantq project
 - **File Replacement**: Automatically clean up old files when new ones are uploaded
 
