@@ -4,77 +4,72 @@ import { createModelFileService } from '@semantql/storage';
 /**
  * Template for creating a storage-integrated service
  * This shows how to wrap an existing service with file upload capabilities
- * You can implement this in your actual model
+ * 
+ * @param {Object} baseService - Your existing CRUD service
+ * @param {string} modelName - Model name (e.g., 'Product')
+ * @param {Object} modelFileConfig - File field configuration
+ * @returns {Object} Enhanced service with file handling
  */
-
 export function createStorageIntegratedService(baseService, modelName, modelFileConfig = {}) {
   // Create model file service
   const fileService = createModelFileService(modelName, modelFileConfig);
   
   // Return enhanced service
   return {
-    // Enhanced methods
+    // Create with files
     async create(data, req = null) {
-      let fileUrls = {};
+      const mergedData = { ...data };
       
       if (req) {
-        fileUrls = await fileService.processFiles(req, { id: 'new' });
+        const fileUrls = await fileService.processFiles(req, { id: 'temp' });
+        Object.assign(mergedData, fileUrls);
       }
       
-      // Merge files with data
-      const mergedData = { ...data, ...fileUrls };
-      
-      // Call base service
       const result = await baseService.create(mergedData);
-      
-      // Update files with actual ID if needed
-      if (req && result.id && result.id !== 'new') {
-        // Re-process with actual ID (optional - for folder organization)
-        // You could move files from 'new' folder to actual ID folder here
-      }
-      
       return result;
     },
     
+    // Update with files
     async update(id, data, req = null) {
-      // Get existing record for cleanup
-      const existing = await baseService.getById(id);
-      
-      let fileUrls = {};
+      const mergedData = { ...data };
       
       if (req) {
-        fileUrls = await fileService.processFiles(req, { id });
+        // Get existing record for cleanup
+        const existing = await baseService.getById(id);
         
-        // Cleanup old files being replaced
+        const fileUrls = await fileService.processFiles(req, { id });
+        Object.assign(mergedData, fileUrls);
+        
+        // Clean up old files being replaced
         await fileService.cleanupReplacedFiles(existing, fileUrls);
       }
-      
-      // Merge updates
-      const mergedData = { ...data, ...fileUrls };
       
       return baseService.update(id, mergedData);
     },
     
+    // Delete with file cleanup
     async delete(id) {
       const record = await baseService.getById(id);
       
-      // Delete associated files
-      await fileService.deleteFiles(record);
+      // Delete associated files (fire and forget - don't block)
+      fileService.deleteFiles(record).catch(err => {
+        console.warn(`File cleanup warning for ${modelName} ${id}:`, err.message);
+      });
       
       // Delete from database
       return baseService.delete(id);
     },
     
-    // Delegate other methods to base service
-    getById: baseService.getById?.bind(baseService) || (() => { throw new Error('Method not implemented'); }),
-    getAll: baseService.getAll?.bind(baseService) || (() => { throw new Error('Method not implemented'); }),
+    // Pass through other methods
+    getById: baseService.getById?.bind(baseService),
+    getAll: baseService.getAll?.bind(baseService),
     findWithPagination: baseService.findWithPagination?.bind(baseService),
-    findByField: baseService.findByField?.bind(baseService),
     
-    // Expose file service methods
+    // Expose file service methods for direct use
     getUploadMiddleware: () => fileService.getUploadMiddleware(),
     processFiles: (req, context) => fileService.processFiles(req, context),
     deleteFiles: (record) => fileService.deleteFiles(record),
+    cleanupReplacedFiles: (existing, newUrls) => fileService.cleanupReplacedFiles(existing, newUrls)
   };
 }
 

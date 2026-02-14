@@ -1,4 +1,4 @@
-// @semantql/storage/index.js
+// @semantq/storage/index.js
 import StorageService from './lib/StorageService.js';
 import * as providers from './providers/index.js';
 import { createUploadMiddleware } from './middleware.js';
@@ -31,18 +31,22 @@ export {
   MIME_CATEGORIES,
   getMimeTypesForCategory,
   expandCategories,
-  // New exports
   StorageConfig,
   ModelFileService,
   createModelFileService
 };
 
-// Default export
+// Default export - single object with all named exports as properties
 export default { 
   createStorage, 
   providers, 
   createUploadMiddleware,
   createModelFileService,
   StorageConfig,
-  ModelFileService
+  ModelFileService,
+  // Include these too for completeness
+  StorageService,
+  defineFileFields,
+  validateFile,
+  MIME_CATEGORIES
 };

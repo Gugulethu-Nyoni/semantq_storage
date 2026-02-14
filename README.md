@@ -85,7 +85,7 @@ const productFileConfig = {
 
 // Create file service for your model
 const productFileService = createModelFileService('Product', productFileConfig);
-
+// 
 // Use in your routes
 app.post('/products', productFileService.getUploadMiddleware(), async (req, res) => {
   try {

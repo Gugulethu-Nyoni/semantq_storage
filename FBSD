@@ -1,4 +1,4 @@
-@semantql/storage/
+@semantq/storage/
 ├── package.json
 ├── index.js              # Main exports
 ├── providers/
