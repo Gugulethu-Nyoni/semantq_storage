@@ -5,7 +5,7 @@ A lightweight, provider-agnostic file storage solution for semantqQL and Node.js
 
 ## Features
 
-- **Provider Agnostic**: Switch between UploadThing, AWS S3, and Cloudinary with zero code changes
+- **Storage Provider Agnostic**: Switch between UploadThing, AWS S3, and Cloudinary with zero code changes
 - **Express Middleware**: Built-in multer middleware for handling single and multiple file uploads
 - **Model-First Approach**: Integrate file storage directly with your data models
 - **Type Safety**: Full MIME type validation with category support (images, documents, etc.)
