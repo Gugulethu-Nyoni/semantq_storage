@@ -1,17 +1,21 @@
 @semantq/storage/
-├── package.json
-├── index.js              # Main exports
+├── index.js                    # Main exports
 ├── providers/
-│   ├── index.js         # Provider exports
-│   ├── uploadthing.js   # UploadThing provider
-│   ├── s3.js           # AWS S3 provider
-│   └── cloudinary.js    # Cloudinary provider -can add more
-├── middleware.js        # Express middleware (single file)
-├── utils.js            # All utils in one file
-├── lib/
-│   ├── StorageService.js       # Core storage service
-│   ├── config.js              # Configuration loader (NEW)
-│   └── ModelFileService.js    # Model-specific file handler (NEW)
-├── templates/
-│   └── storage-integrated-service.js  # Template for CLI (NEW)
+│   ├── index.js               # Provider registry
+│   ├── BaseProvider.js        # Abstract base class
+│   ├── LocalProvider.js       # Local filesystem
+│   ├── UploadThingProvider.js # UploadThing cloud
+│   ├── S3Provider.js          # AWS S3
+│   └── CloudinaryProvider.js  # Cloudinary (optional)
+├── services/
+│   └── StorageService.js      # Core service with provider management
+├── models/
+│   └── FileStorage.js         # Database model (Prisma)
+├── middleware/
+│   └── upload.js              # Multer/upload middleware
+├── utils/
+│   ├── fileUtils.js           # File helpers (mime, hash, path)
+│   └── config.js              # Configuration loader
+├── migrations/
+│   └── create_file_storage.sql
 └── README.md

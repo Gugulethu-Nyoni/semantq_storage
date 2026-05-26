@@ -1,34 +1,18 @@
 {
   "name": "@semantq/storage",
   "version": "1.0.0",
-  "description": "Lightweight, provider-agnostic file storage for Node.js",
-  "main": "index.js",
   "type": "module",
+  "main": "index.js",
   "exports": {
     ".": "./index.js",
-    "./middleware": "./middleware.js",
-    "./utils": "./utils.js"
+    "./providers": "./providers/index.js",
+    "./lib/StorageService": "./lib/StorageService.js"
   },
-  "scripts": {
-    "test": "node --test"
-  },
-  "keywords": ["storage", "upload", "s3", "uploadthing", "cloudinary"],
-  "author": "Gugulethu Nyoni",
-  "license": "MIT",
   "dependencies": {
-    "multer": "^1.4.5-lts.1",
-    "mime-types": "^2.1.35"
+    "uploadthing": "^6.0.0",
+    "crypto": "^1.0.1"
   },
   "peerDependencies": {
-    "@aws-sdk/client-s3": "^3.0.0",
-    "@uploadthing/server": "^6.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@aws-sdk/client-s3": {
-      "optional": true
-    },
-    "@uploadthing/server": {
-      "optional": true
-    }
+    "express": "^4.18.0"
   }
 }

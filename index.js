@@ -1,52 +1,52 @@
 // @semantq/storage/index.js
+
+import configLoader from '../../../config_loader.js';
 import StorageService from './lib/StorageService.js';
-import * as providers from './providers/index.js';
-import { createUploadMiddleware } from './middleware.js';
-import { 
-  defineFileFields, 
-  validateFile, 
-  generateFolderPath,
-  MIME_CATEGORIES,
-  getMimeTypesForCategory,
-  expandCategories
-} from './utils.js';
 
-// Import new components
-import StorageConfig from './lib/config.js';
-import { ModelFileService, createModelFileService } from './lib/ModelFileService.js';
+let storageService = null;
 
-// Factory function for easy creation
-export function createStorage(config = {}) {
-  return new StorageService(config);
+export async function getStorageService() {
+  if (!storageService) {
+    const config = await configLoader();
+    storageService = new StorageService(config.storage);
+  }
+  return storageService;
 }
 
-// Re-export everything
-export {
-  StorageService,
-  providers,
-  createUploadMiddleware,
-  defineFileFields,
-  validateFile,
-  generateFolderPath,
-  MIME_CATEGORIES,
-  getMimeTypesForCategory,
-  expandCategories,
-  StorageConfig,
-  ModelFileService,
-  createModelFileService
+export const Storage = {
+  async upload(file, metadata = {}) {
+    const service = await getStorageService();
+    let fileBuffer = file;
+    if (file instanceof File) {
+      fileBuffer = Buffer.from(await file.arrayBuffer());
+    }
+    return service.upload(fileBuffer, metadata);
+  },
+
+  async delete(storageKey) {
+    const service = await getStorageService();
+    return service.delete(storageKey);
+  },
+
+  async getUrl(storageKey) {
+    const service = await getStorageService();
+    return service.getUrl(storageKey);
+  },
+
+  async getBuffer(storageKey) {
+    const service = await getStorageService();
+    return service.getBuffer(storageKey);
+  },
+
+  async exists(storageKey) {
+    const service = await getStorageService();
+    return service.exists(storageKey);
+  }
 };
 
-// Default export - single object with all named exports as properties
-export default { 
-  createStorage, 
-  providers, 
-  createUploadMiddleware,
-  createModelFileService,
-  StorageConfig,
-  ModelFileService,
-  // Include these too for completeness
-  StorageService,
-  defineFileFields,
-  validateFile,
-  MIME_CATEGORIES
-};
+export { default as BaseStorageProvider } from './providers/BaseProvider.js';
+export { default as LocalProvider } from './providers/LocalProvider.js';
+export { default as UploadThingProvider } from './providers/UploadThingProvider.js';
+export { default as StorageService } from './lib/StorageService.js';
+
+export default Storage;
