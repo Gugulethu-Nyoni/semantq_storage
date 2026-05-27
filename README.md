@@ -12,6 +12,75 @@ npm install @semantq/storage
 
 ## Quick Start
 
+
+## CLI Generator
+
+Generate a complete file storage service for any model.
+
+```bash
+npx semantq make:storage <ModelName>
+```
+
+### What It Generates
+
+Creates a service file at `services/<ModelName>Service.js` with:
+
+| Method | Description |
+|---|---|
+| `uploadFile(req)` | Handles file upload with validation, storage, and DB record creation |
+| `deleteFile(fileId, userData)` | Deletes file from storage and database |
+| `getFilesByQuery(orgId, recordId, ...)` | Query files by organization, record, stage, etc. |
+| `getById(id)` | Get single file record |
+| `getAll()` | Get all file records |
+| `update(id, data)` | Update file metadata |
+
+### Example
+
+```bash
+npx semantq make:storage ProjectFile
+```
+
+Generates `services/ProjectFileService.js`:
+
+```js
+import ProjectFileModel from '../models/postgresql/ProjectFile.js';
+import pylonService from '../packages/@semantq/pylon/services/pylonService.js';
+import { Storage } from '../packages/@semantq/storage/index.js';
+
+class ProjectFileService {
+  async create(req) { /* ... */ }
+  async getFilesByProject(projectId) { /* ... */ }
+  async getById(id) { /* ... */ }
+  async getAll() { /* ... */ }
+  async update(id, data) { /* ... */ }
+  async delete(id) { /* ... */ }
+
+  async uploadFile(req) {
+    // Validates file, uploads to storage, creates DB record
+    // Falls back to local storage if cloud provider unavailable
+  }
+
+  async deleteFile(fileId, userData) {
+    // Deletes from storage provider, then hard-deletes DB record
+  }
+
+  async getFilesByQuery(organizationId, projectId, stageKey, modelName, fieldKey) { /* ... */ }
+}
+```
+
+### How It Works
+
+1. **Upload flow:** File → validate → upload to storage provider → get `publicUrl` → insert DB record with URL
+2. **Delete flow:** Get DB record → delete from storage using `fileKey` → hard delete DB record
+3. **Fallback:** If cloud provider (S3, Cloudinary, UploadThing) is not configured or fails, automatically falls back to local filesystem storage at `/uploads`
+4. **DB field:** The `fileUrl` column always stores whatever URL the provider returns — cloud URL or local path — the rest of the app doesn't need to know which provider is active
+
+### Requirements
+
+- Model must have columns: `fileUrl`, `fileKey`, `filename`, `modelName`, `fieldKey`
+- `@semantq/storage` must be installed
+- Storage config in `server.config.js`
+
 ```js
 import { Storage } from '@semantq/storage';
 
