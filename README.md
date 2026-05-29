@@ -18,7 +18,7 @@ npm install @semantq/storage
 Generate a complete file storage service for any model.
 
 ```bash
-npx semantq make:storage <ModelName>
+npm semantq make:storage <ModelName>
 ```
 
 ### What It Generates
