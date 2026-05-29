@@ -37,7 +37,7 @@ Creates a service file at `services/<ModelName>Service.js` with:
 ### Example
 
 ```bash
-npx semantq make:storage ProjectFile
+npm semantq make:storage ProjectFile
 ```
 
 Generates `services/ProjectFileService.js`:
