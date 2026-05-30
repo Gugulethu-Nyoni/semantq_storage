@@ -267,3 +267,7 @@ class MyProvider extends BaseStorageProvider {
 ## License
 
 MIT
+
+## semantQL Main Documentation: [semantQL](https://github.com/Gugulethu-Nyoni/semantqQL)
+## Semantq Main Documentation: [Semantq](https://github.com/Gugulethu-Nyoni/semantq).
+
