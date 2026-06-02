@@ -2,7 +2,7 @@
 
 File storage module for semantqQL — the Node.js backend of the semantq framework.
 
-Organizes files by model record structure (e.g., `product/1/images/`) and provides a unified API across multiple storage providers.
+Organizes files by model record structure (e.g., `product/1/images/`) and provides a unified API across multiple storage providers. Uploadthing is our default cloud storage. 
 
 ## Installation
 
